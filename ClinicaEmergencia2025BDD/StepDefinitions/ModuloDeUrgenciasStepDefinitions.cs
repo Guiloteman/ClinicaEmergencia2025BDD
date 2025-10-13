@@ -74,5 +74,12 @@ namespace ClinicaEmergencia2025BDD.StepDefinitions
                 Assert.IsTrue(pacienteEnCola.cuil.Equals(cuilEsperado.ToString()));
             }
         }
+
+        [Then("se muestra el mensaje de error {string}")]
+        public void ThenSeMuestraElMensajeDeError(string p0, DataTable dataTable)
+        {
+            string ex = servicioUrgencias.verificarPacienteRegistrado(dataTable.Rows[0]["Cuil"]);
+            Assert.AreEqual(p0, ex);
+        }
     }
 }

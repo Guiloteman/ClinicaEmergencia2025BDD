@@ -36,22 +36,21 @@ namespace ClinicaEmergencia2025BDD.App
             nuevoIngreso.frecuenciaRespiratoria = new FrecuenciaRespiratoria(frecuenciaRespiratoria);
             nuevoIngreso.tensionArterial = new TensionArterial(tensionSistolica, tensionDiastolica);
         }
-        public void ActualizarEstadoIngreso(int ingresoId, string nuevoEstado)
-        {
-            // Lógica para actualizar el estado de un ingreso
-        }
-        public void AsignarAtencion(int ingresoId, int atencionId)
-        {
-            // Lógica para asignar una atención a un ingreso
-        }
-        public void GenerarInforme(int ingresoId)
-        {
-            // Lógica para generar un informe del ingreso
-        }
-
         public Paciente ObtenerPacienteEnCola(string cuil)
         {
             return dbPacientes.ObtenerPacientePorCuil(cuil);
+        }
+
+        public string verificarPacienteRegistrado(string cuil)
+        {
+            var paciente = dbPacientes.ObtenerPacientePorCuil(cuil);
+            if (paciente == null)
+            {
+                Exception ex = new Exception("Paciente no registrado. No se puede ingresar a urgencias.");
+                return ex.Message.ToString();
+
+            }
+            return null;
         }
     }
 }

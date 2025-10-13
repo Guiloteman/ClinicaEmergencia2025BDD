@@ -192,6 +192,82 @@ await this.FeatureBackgroundAsync();
             }
             await this.ScenarioCleanupAsync();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Ingreso de paciente, no registrado, a la lista de espera de emergencias")]
+        [NUnit.Framework.CategoryAttribute("tag2")]
+        public async System.Threading.Tasks.Task IngresoDePacienteNoRegistradoALaListaDeEsperaDeEmergencias()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "tag2"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Ingreso de paciente, no registrado, a la lista de espera de emergencias", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 31
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 7
+await this.FeatureBackgroundAsync();
+#line hidden
+                global::Reqnroll.Table table5 = new global::Reqnroll.Table(new string[] {
+                            "Cuil",
+                            "Nombre",
+                            "Apellido",
+                            "Obra Social"});
+                table5.AddRow(new string[] {
+                            "20-11111111-3",
+                            "Juan",
+                            "Gomez",
+                            "Galeno"});
+                table5.AddRow(new string[] {
+                            "27-22222222-6",
+                            "Maria",
+                            "Lopez",
+                            "MedLife"});
+                table5.AddRow(new string[] {
+                            "20-33333333-8",
+                            "Carlos",
+                            "Sanchez",
+                            "OSDE"});
+#line 32
+ await testRunner.GivenAsync("que estan registrados los siguientes pacientes:", ((string)(null)), table5, "Given ");
+#line hidden
+                global::Reqnroll.Table table6 = new global::Reqnroll.Table(new string[] {
+                            "Cuil",
+                            "Informe",
+                            "Nivel de Emergencia",
+                            "Temperatura",
+                            "Frecuencia Cardíaca",
+                            "Frecuencia Respiratoria",
+                            "Tensión Arterial"});
+                table6.AddRow(new string[] {
+                            "20-44444444-3",
+                            "Dolor de cabeza severo",
+                            "3",
+                            "37.5",
+                            "80",
+                            "18",
+                            "120/80"});
+#line 37
+ await testRunner.WhenAsync("ingresan a urgencias los siguientes pacientes:", ((string)(null)), table6, "When ");
+#line hidden
+                global::Reqnroll.Table table7 = new global::Reqnroll.Table(new string[] {
+                            "Cuil"});
+                table7.AddRow(new string[] {
+                            "20-44444444-3"});
+#line 40
+ await testRunner.ThenAsync("se muestra el mensaje de error \"Paciente no registrado. No se puede ingresar a ur" +
+                        "gencias.\"", ((string)(null)), table7, "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
     }
 }
 #pragma warning restore
