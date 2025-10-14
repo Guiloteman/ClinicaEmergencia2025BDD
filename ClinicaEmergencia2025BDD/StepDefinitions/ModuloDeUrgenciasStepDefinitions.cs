@@ -96,6 +96,7 @@ namespace ClinicaEmergencia2025BDD.StepDefinitions
         public void ThenSeMuestraElMensajeDeError_(string p0, DataTable dataTable)
         {
             servicioUrgencias.ObtenerExcepcion(p0, dataTable);
+            servicioUrgencias.ObtenerExcepcionValoreNegativos(p0, dataTable);
         }
 
     }

@@ -89,5 +89,28 @@ namespace ClinicaEmergencia2025BDD.App
             }
             
         }
+
+        public void ObtenerExcepcionValoreNegativos(string p0, DataTable dataTable)
+        {
+            ex = new Exception(p0);
+            foreach (var row in dataTable.Rows)
+            {
+                decimal fC = decimal.Parse(row["Frecuencia Cardíaca"]);
+                decimal fr = decimal.Parse(row["Frecuencia Respiratoria"]);   
+
+                switch (p0)
+                {
+                    case "Los datos cargados, correspondientes para los de frecuencia, no pueden ser negativos.":
+                        if (decimal.IsNegative(fC) || decimal.IsNegative(fr))
+                        {
+                            Assert.AreEqual(p0, ex.Message.ToString());
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+        }
     }
 }

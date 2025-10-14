@@ -270,14 +270,14 @@ await this.FeatureBackgroundAsync();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Ingreso de paciente, pero algunos de los datos fue omitido")]
+        [NUnit.Framework.DescriptionAttribute("Ingreso de paciente, pero algunos de los datos fue omitidot")]
         [NUnit.Framework.CategoryAttribute("tag3")]
-        public async System.Threading.Tasks.Task IngresoDePacientePeroAlgunosDeLosDatosFueOmitido()
+        public async System.Threading.Tasks.Task IngresoDePacientePeroAlgunosDeLosDatosFueOmitidot()
         {
             string[] tagsOfScenario = new string[] {
                     "tag3"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Ingreso de paciente, pero algunos de los datos fue omitido", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Ingreso de paciente, pero algunos de los datos fue omitidot", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 45
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -351,6 +351,94 @@ await this.FeatureBackgroundAsync();
                             "120/80"});
 #line 54
  await testRunner.ThenAsync("se muestra el mensaje de error \"Faltan agregar algunos datos.\".", ((string)(null)), table10, "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Ingreso de la frecuencia cardíaca y respiratoria en valores negaitivos")]
+        [NUnit.Framework.CategoryAttribute("tag4")]
+        public async System.Threading.Tasks.Task IngresoDeLaFrecuenciaCardiacaYRespiratoriaEnValoresNegaitivos()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "tag4"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Ingreso de la frecuencia cardíaca y respiratoria en valores negaitivos", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 59
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 7
+await this.FeatureBackgroundAsync();
+#line hidden
+                global::Reqnroll.Table table11 = new global::Reqnroll.Table(new string[] {
+                            "Cuil",
+                            "Nombre",
+                            "Apellido",
+                            "Obra Social"});
+                table11.AddRow(new string[] {
+                            "20-11111111-3",
+                            "Juan",
+                            "Gomez",
+                            "Galeno"});
+                table11.AddRow(new string[] {
+                            "27-22222222-6",
+                            "Maria",
+                            "Lopez",
+                            "MedLife"});
+                table11.AddRow(new string[] {
+                            "20-33333333-8",
+                            "Carlos",
+                            "Sanchez",
+                            "OSDE"});
+#line 60
+ await testRunner.GivenAsync("que estan registrados los siguientes pacientes:", ((string)(null)), table11, "Given ");
+#line hidden
+                global::Reqnroll.Table table12 = new global::Reqnroll.Table(new string[] {
+                            "Cuil",
+                            "Informe",
+                            "Nivel de Emergencia",
+                            "Temperatura",
+                            "Frecuencia Cardíaca",
+                            "Frecuencia Respiratoria",
+                            "Tensión Arterial"});
+                table12.AddRow(new string[] {
+                            "20-33333333-8",
+                            "Dolor de cabeza severo",
+                            "Urgencia menor",
+                            "37.5",
+                            "80",
+                            "18",
+                            "120/80"});
+#line 65
+ await testRunner.WhenAsync("ingresan a urgencias los siguientes pacientes:", ((string)(null)), table12, "When ");
+#line hidden
+                global::Reqnroll.Table table13 = new global::Reqnroll.Table(new string[] {
+                            "Cuil",
+                            "Informe",
+                            "Nivel de Emergencia",
+                            "Temperatura",
+                            "Frecuencia Cardíaca",
+                            "Frecuencia Respiratoria",
+                            "Tensión Arterial"});
+                table13.AddRow(new string[] {
+                            "20-33333333-8",
+                            "Dolor de cabeza severo",
+                            "Urgencia menor",
+                            "37.5",
+                            "-80",
+                            "-18",
+                            "120/80"});
+#line 68
+ await testRunner.ThenAsync("se muestra el mensaje de error \"Los datos cargados, correspondientes para los de " +
+                        "frecuencia, no pueden ser negativos.\".", ((string)(null)), table13, "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();

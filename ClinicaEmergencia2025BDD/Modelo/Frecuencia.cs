@@ -12,7 +12,16 @@ namespace ClinicaEmergencia2025BDD.Modelo
 
         public Frecuencia(decimal valor)
         {
-            this.valor = valor;
+            this.valor = verirficarValor(valor);
+        }
+
+        public decimal verirficarValor(decimal valor)
+        {
+            if (valor < 0)
+            {
+                throw new Exception("El valor de la frecuencia no puede ser negativo.");
+            }
+            return valor;
         }
     }
 }

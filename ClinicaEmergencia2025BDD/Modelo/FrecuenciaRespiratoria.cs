@@ -5,8 +5,5 @@
         public FrecuenciaRespiratoria(decimal valor) : base(valor)
         {
         }
-
-        public decimal Valor { get; set; }
-        
     }
 }
