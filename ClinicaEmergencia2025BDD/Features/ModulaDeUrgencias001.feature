@@ -40,3 +40,17 @@ Scenario: Ingreso de paciente, no registrado, a la lista de espera de emergencia
 	Then se muestra el mensaje de error "Paciente no registrado. No se puede ingresar a urgencias."
 		| Cuil          |
 		| 20-44444444-3 |
+
+@tag3
+Scenario: Ingreso de paciente, pero algunos de los datos fue omitido
+	Given que estan registrados los siguientes pacientes:
+		| Cuil          | Nombre | Apellido | Obra Social |
+		| 20-11111111-3 | Juan   | Gomez    | Galeno      |
+		| 27-22222222-6 | Maria  | Lopez    | MedLife     |
+		| 20-33333333-8 | Carlos | Sanchez  | OSDE        |
+	When ingresan a urgencias los siguientes pacientes:
+		| Cuil          | Informe                  | Nivel de Emergencia | Temperatura | Frecuencia Cardíaca | Frecuencia Respiratoria | Tensión Arterial |
+		| 20-33333333-8 | Dolor de cabeza severo   |                     | 37.5        | 80                  | 18                      | 120/80           |
+	Then se muestra el mensaje de error "Faltan agregar algunos datos.".
+		| Cuil          | Informe                  | Nivel de Emergencia | Temperatura | Frecuencia Cardíaca | Frecuencia Respiratoria | Tensión Arterial |
+		| 20-33333333-8 | Dolor de cabeza severo   |                     | 37.5        | 80                  | 18                      | 120/80           |

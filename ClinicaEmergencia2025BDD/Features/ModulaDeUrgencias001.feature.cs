@@ -268,6 +268,93 @@ await this.FeatureBackgroundAsync();
             }
             await this.ScenarioCleanupAsync();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Ingreso de paciente, pero algunos de los datos fue omitido")]
+        [NUnit.Framework.CategoryAttribute("tag3")]
+        public async System.Threading.Tasks.Task IngresoDePacientePeroAlgunosDeLosDatosFueOmitido()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "tag3"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Ingreso de paciente, pero algunos de los datos fue omitido", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 45
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 7
+await this.FeatureBackgroundAsync();
+#line hidden
+                global::Reqnroll.Table table8 = new global::Reqnroll.Table(new string[] {
+                            "Cuil",
+                            "Nombre",
+                            "Apellido",
+                            "Obra Social"});
+                table8.AddRow(new string[] {
+                            "20-11111111-3",
+                            "Juan",
+                            "Gomez",
+                            "Galeno"});
+                table8.AddRow(new string[] {
+                            "27-22222222-6",
+                            "Maria",
+                            "Lopez",
+                            "MedLife"});
+                table8.AddRow(new string[] {
+                            "20-33333333-8",
+                            "Carlos",
+                            "Sanchez",
+                            "OSDE"});
+#line 46
+ await testRunner.GivenAsync("que estan registrados los siguientes pacientes:", ((string)(null)), table8, "Given ");
+#line hidden
+                global::Reqnroll.Table table9 = new global::Reqnroll.Table(new string[] {
+                            "Cuil",
+                            "Informe",
+                            "Nivel de Emergencia",
+                            "Temperatura",
+                            "Frecuencia Cardíaca",
+                            "Frecuencia Respiratoria",
+                            "Tensión Arterial"});
+                table9.AddRow(new string[] {
+                            "20-33333333-8",
+                            "Dolor de cabeza severo",
+                            "",
+                            "37.5",
+                            "80",
+                            "18",
+                            "120/80"});
+#line 51
+ await testRunner.WhenAsync("ingresan a urgencias los siguientes pacientes:", ((string)(null)), table9, "When ");
+#line hidden
+                global::Reqnroll.Table table10 = new global::Reqnroll.Table(new string[] {
+                            "Cuil",
+                            "Informe",
+                            "Nivel de Emergencia",
+                            "Temperatura",
+                            "Frecuencia Cardíaca",
+                            "Frecuencia Respiratoria",
+                            "Tensión Arterial"});
+                table10.AddRow(new string[] {
+                            "20-33333333-8",
+                            "Dolor de cabeza severo",
+                            "",
+                            "37.5",
+                            "80",
+                            "18",
+                            "120/80"});
+#line 54
+ await testRunner.ThenAsync("se muestra el mensaje de error \"Faltan agregar algunos datos.\".", ((string)(null)), table10, "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
     }
 }
 #pragma warning restore

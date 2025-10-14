@@ -13,6 +13,7 @@ namespace ClinicaEmergencia2025BDD.StepDefinitions
         private Enfermera enfermera;
         private DBPruebaEnMemoria dbMockeada;
         private ServicioUrgencias servicioUrgencias;
+        private Exception excepcionEsperda;
         public ModuloDeUrgenciasStepDefinitions()
         {
             dbMockeada = new DBPruebaEnMemoria();
@@ -50,17 +51,26 @@ namespace ClinicaEmergencia2025BDD.StepDefinitions
         [When("ingresan a urgencias los siguientes pacientes:")]
         public void WhenIngresanAUrgenciasLosSiguientesPacientes(DataTable dataTable)
         {
+            excepcionEsperda = null;
             foreach (var row in dataTable.Rows)
             {
                 string cuil = row["Cuil"];
-                NivelEmergencia nivelEmergencia = (NivelEmergencia)Enum.Parse(typeof(NivelEmergencia), row["Nivel de Emergencia"]);
+                string nivelEmergencia = row["Nivel de Emergencia"];
                 string informe = row["Informe"];
                 decimal temperatura = decimal.Parse(row["Temperatura"]);
                 decimal frecuenciaCardiaca = decimal.Parse(row["Frecuencia Cardíaca"]);
                 decimal frecuenciaRespiratoria = decimal.Parse(row["Frecuencia Respiratoria"]);
                 decimal tensionSistolica = decimal.Parse(row["Tensión Arterial"].ToString().Split('/')[0]);
                 decimal tensionDiastolica = decimal.Parse(row["Tensión Arterial"].ToString().Split('/')[1]);
-                servicioUrgencias.RegistrarUrgencia(cuil, enfermera, nivelEmergencia, informe, temperatura, frecuenciaCardiaca, frecuenciaRespiratoria, tensionSistolica, tensionDiastolica);
+                try
+                {
+                    servicioUrgencias.RegistrarUrgencia(cuil, enfermera, nivelEmergencia, informe, temperatura, frecuenciaCardiaca, frecuenciaRespiratoria, tensionSistolica, tensionDiastolica);
+                }
+                catch (Exception ex)
+                {
+                    excepcionEsperda = ex;
+                    break;
+                }
             }
         }
 
@@ -81,5 +91,12 @@ namespace ClinicaEmergencia2025BDD.StepDefinitions
             string ex = servicioUrgencias.verificarPacienteRegistrado(dataTable.Rows[0]["Cuil"]);
             Assert.AreEqual(p0, ex);
         }
+
+        [Then("se muestra el mensaje de error {string}.")]
+        public void ThenSeMuestraElMensajeDeError_(string p0, DataTable dataTable)
+        {
+            servicioUrgencias.ObtenerExcepcion(p0, dataTable);
+        }
+
     }
 }

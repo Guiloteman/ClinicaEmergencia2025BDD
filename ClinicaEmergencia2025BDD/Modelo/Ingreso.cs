@@ -12,7 +12,7 @@ namespace ClinicaEmergencia2025BDD.Modelo
         public Atencion atencion;
         public Paciente paciente;
         public Enfermera enfermera;
-        public NivelEmergencia nivelEmergencia;
+        public Nivel nivel;
         public EstadoIngreso estadoIngreso = EstadoIngreso.Pendiente;
         public string informe;
         public DateTime FechaIngreso { get; set; } = DateTime.Now;

@@ -19,6 +19,7 @@ namespace ClinicaEmergencia2025BDD.StepDefinitions.Mock
         {
             pacientes.Add(paciente.cuil, paciente);
         }
+
         public Paciente ObtenerPacientePorCuil(string cuil)
         {
             if (pacientes.ContainsKey(cuil))

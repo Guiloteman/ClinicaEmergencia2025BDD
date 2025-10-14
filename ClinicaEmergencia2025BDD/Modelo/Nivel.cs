@@ -8,6 +8,7 @@ namespace ClinicaEmergencia2025BDD.Modelo
 {
     public class Nivel
     {
+        private NivelEmergencia nivel;
         public Dictionary<NivelEmergencia, int> tiempoRespuesta = new Dictionary<NivelEmergencia, int>
         {
             { NivelEmergencia.Critica, 5 },          // 5 minutos
@@ -17,9 +18,23 @@ namespace ClinicaEmergencia2025BDD.Modelo
             { NivelEmergencia.SinUrgencia, 240 }    // 240 minutos
         };
 
+        public Nivel(string nivel)
+        {
+            this.nivel = nivelEmergencia(nivel);
+        }
+        
         public int ObtenerTiempoRespuesta(NivelEmergencia nivel)
         {
             return tiempoRespuesta[nivel];
+        }
+
+        public NivelEmergencia nivelEmergencia(string nivel)
+        {
+            if (!Enum.IsDefined(typeof(NivelEmergencia), nivel))
+            {
+                throw new ArgumentException("Nivel de emergencia no válido.");
+            }
+            return (NivelEmergencia)Enum.Parse(typeof(NivelEmergencia), nivel);
         }
     }
 }

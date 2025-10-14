@@ -1,15 +1,18 @@
 ﻿using ClinicaEmergencia2025BDD.App.Interfaces;
+using ClinicaEmergencia2025BDD.Modelo;
+using Microsoft.IdentityModel.Tokens;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ClinicaEmergencia2025BDD.Modelo;
 
 namespace ClinicaEmergencia2025BDD.App
 {
     public class ServicioUrgencias
     {
+        Exception ex;
         public RepositorioPacientes dbPacientes;
         public ServicioUrgencias(RepositorioPacientes repoPacientes)
         {
@@ -17,7 +20,7 @@ namespace ClinicaEmergencia2025BDD.App
         }
         public void RegistrarUrgencia(string cuilPaciente,
                                       Enfermera enfermera,
-                                      NivelEmergencia nivelEmergencia,
+                                      string nivelEmergencia,
                                       string informe,
                                       decimal temperatura,
                                       decimal frecuenciaCardiaca,
@@ -26,16 +29,23 @@ namespace ClinicaEmergencia2025BDD.App
                                       decimal tensionDiastolica
                                       )
         {
-            Ingreso nuevoIngreso = new Ingreso();
-            nuevoIngreso.paciente = dbPacientes.ObtenerPacientePorCuil(cuilPaciente);
-            nuevoIngreso.enfermera = enfermera;
-            nuevoIngreso.nivelEmergencia = nivelEmergencia;
-            nuevoIngreso.informe = informe;
-            nuevoIngreso.temperatura = temperatura;
-            nuevoIngreso.frecuenciaCardiaca = new FrecuenciaCardiaca(frecuenciaCardiaca);
-            nuevoIngreso.frecuenciaRespiratoria = new FrecuenciaRespiratoria(frecuenciaRespiratoria);
-            nuevoIngreso.tensionArterial = new TensionArterial(tensionSistolica, tensionDiastolica);
-        }
+            try
+            {
+                Ingreso nuevoIngreso = new Ingreso();
+                nuevoIngreso.paciente = dbPacientes.ObtenerPacientePorCuil(cuilPaciente);
+                nuevoIngreso.enfermera = enfermera;
+                nuevoIngreso.nivel = new Nivel(nivelEmergencia);
+                nuevoIngreso.informe = informe;
+                nuevoIngreso.temperatura = temperatura;
+                nuevoIngreso.frecuenciaCardiaca = new FrecuenciaCardiaca(frecuenciaCardiaca);
+                nuevoIngreso.frecuenciaRespiratoria = new FrecuenciaRespiratoria(frecuenciaRespiratoria);
+                nuevoIngreso.tensionArterial = new TensionArterial(tensionSistolica, tensionDiastolica);
+            }
+            catch (Exception ex)
+            {
+                ex = new Exception(ex.Message.ToString());
+            }
+        }   
         public Paciente ObtenerPacienteEnCola(string cuil)
         {
             return dbPacientes.ObtenerPacientePorCuil(cuil);
@@ -46,11 +56,38 @@ namespace ClinicaEmergencia2025BDD.App
             var paciente = dbPacientes.ObtenerPacientePorCuil(cuil);
             if (paciente == null)
             {
-                Exception ex = new Exception("Paciente no registrado. No se puede ingresar a urgencias.");
+                ex = new Exception("Paciente no registrado. No se puede ingresar a urgencias.");
                 return ex.Message.ToString();
-
             }
             return null;
+        }
+
+        public void ObtenerExcepcion(string p0, DataTable dataTable)
+        {
+            ex = new Exception(p0);
+            foreach (var row in dataTable.Rows)
+            {
+                string cuil = row["Cuil"];
+                string informe = row["Informe"];
+                string nivel = row["Nivel de Emergencia"];
+                string temperatura = row["Temperatura"];
+                string fC = row["Frecuencia Cardíaca"];
+                string fr = row["Frecuencia Respiratoria"];
+                string ten = row["Tensión Arterial"];
+                
+                switch(p0)
+                {
+                    case "Faltan agregar algunos datos.":
+                        if (string.IsNullOrWhiteSpace(cuil) || string.IsNullOrWhiteSpace(informe) || string.IsNullOrWhiteSpace(nivel) || string.IsNullOrWhiteSpace(temperatura) || string.IsNullOrWhiteSpace(fC) || string.IsNullOrWhiteSpace(fr) || string.IsNullOrWhiteSpace(ten))
+                        {
+                            Assert.AreEqual(p0, ex.Message.ToString());
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+            
         }
     }
 }
