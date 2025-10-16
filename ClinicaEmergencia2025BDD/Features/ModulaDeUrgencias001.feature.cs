@@ -443,6 +443,106 @@ await this.FeatureBackgroundAsync();
             }
             await this.ScenarioCleanupAsync();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Ingreso de paciente a urgencias con atencion por prioriadad")]
+        [NUnit.Framework.CategoryAttribute("tag5")]
+        public async System.Threading.Tasks.Task IngresoDePacienteAUrgenciasConAtencionPorPrioriadad()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "tag5"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Ingreso de paciente a urgencias con atencion por prioriadad", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 73
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 7
+await this.FeatureBackgroundAsync();
+#line hidden
+                global::Reqnroll.Table table14 = new global::Reqnroll.Table(new string[] {
+                            "Cuil",
+                            "Nombre",
+                            "Apellido",
+                            "Obra Social"});
+                table14.AddRow(new string[] {
+                            "20-11111111-3",
+                            "Juan",
+                            "Gomez",
+                            "Galeno"});
+                table14.AddRow(new string[] {
+                            "27-22222222-6",
+                            "Maria",
+                            "Lopez",
+                            "MedLife"});
+                table14.AddRow(new string[] {
+                            "20-33333333-8",
+                            "Carlos",
+                            "Sanchez",
+                            "OSDE"});
+#line 74
+ await testRunner.GivenAsync("que estan registrados los siguientes pacientes:", ((string)(null)), table14, "Given ");
+#line hidden
+                global::Reqnroll.Table table15 = new global::Reqnroll.Table(new string[] {
+                            "Cuil",
+                            "Informe",
+                            "Nivel de Emergencia",
+                            "Temperatura",
+                            "Frecuencia Cardíaca",
+                            "Frecuencia Respiratoria",
+                            "Tensión Arterial"});
+                table15.AddRow(new string[] {
+                            "20-33333333-8",
+                            "Dolor de cabeza severo",
+                            "UrgenciaMenor",
+                            "37.5",
+                            "80",
+                            "18",
+                            "120/80"});
+                table15.AddRow(new string[] {
+                            "20-11111111-3",
+                            "Dificultad para respirar",
+                            "Urgencia",
+                            "38.2",
+                            "95",
+                            "22",
+                            "130/85"});
+                table15.AddRow(new string[] {
+                            "27-22222222-6",
+                            "Fractura en brazo",
+                            "Emergencia",
+                            "36.8",
+                            "75",
+                            "16",
+                            "118/76"});
+#line 79
+ await testRunner.WhenAsync("ingresan a urgencias los siguientes pacientes:", ((string)(null)), table15, "When ");
+#line hidden
+                global::Reqnroll.Table table16 = new global::Reqnroll.Table(new string[] {
+                            "Cuil",
+                            "Nivel de Prioridad"});
+                table16.AddRow(new string[] {
+                            "27-22222222-6",
+                            "Emergencia"});
+                table16.AddRow(new string[] {
+                            "20-11111111-3",
+                            "Urgencia"});
+                table16.AddRow(new string[] {
+                            "20-33333333-8",
+                            "UrgenciaMenor"});
+#line 84
+ await testRunner.ThenAsync("los pacientes deben ser añadidos a la cola de atencion ordenados por prioridad de" +
+                        " la siguiente manera:", ((string)(null)), table16, "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
     }
 }
 #pragma warning restore

@@ -80,7 +80,7 @@ namespace ClinicaEmergencia2025BDD.StepDefinitions
             foreach (var row in dataTable.Rows)
             {
                 string cuilEsperado = row["Cuil"];
-                Paciente pacienteEnCola = servicioUrgencias.ObtenerPacienteEnCola(cuilEsperado);
+                Paciente pacienteEnCola = servicioUrgencias.ObtenerPacienteEnCola(cuilEsperado);      
                 Assert.IsTrue(pacienteEnCola.cuil.Equals(cuilEsperado.ToString()));
             }
         }
@@ -98,6 +98,14 @@ namespace ClinicaEmergencia2025BDD.StepDefinitions
             servicioUrgencias.ObtenerExcepcion(p0, dataTable);
             servicioUrgencias.ObtenerExcepcionValoreNegativos(p0, dataTable);
         }
+
+        [Then("los pacientes deben ser añadidos a la cola de atencion ordenados por prioridad de la siguiente manera:")]
+        public void ThenLosPacientesDebenSerAnadidosALaColaDeAtencionOrdenadosPorPrioridadDeLaSiguienteManera(DataTable dataTable)
+        {
+
+            servicioUrgencias.colaPrioridad(dataTable.Rows[0]["Nivel de Prioridad"]);
+        }
+
 
     }
 }

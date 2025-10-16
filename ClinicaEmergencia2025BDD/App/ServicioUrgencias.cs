@@ -13,10 +13,13 @@ namespace ClinicaEmergencia2025BDD.App
     public class ServicioUrgencias
     {
         Exception ex;
-        public RepositorioPacientes dbPacientes;
+        private RepositorioPacientes dbPacientes;
+
+        List<Ingreso> ingresos;
         public ServicioUrgencias(RepositorioPacientes repoPacientes)
         {
             dbPacientes = repoPacientes;
+             ingresos = new List<Ingreso>();
         }
         public void RegistrarUrgencia(string cuilPaciente,
                                       Enfermera enfermera,
@@ -40,12 +43,15 @@ namespace ClinicaEmergencia2025BDD.App
                 nuevoIngreso.frecuenciaCardiaca = new FrecuenciaCardiaca(frecuenciaCardiaca);
                 nuevoIngreso.frecuenciaRespiratoria = new FrecuenciaRespiratoria(frecuenciaRespiratoria);
                 nuevoIngreso.tensionArterial = new TensionArterial(tensionSistolica, tensionDiastolica);
+                ingresos.Add(nuevoIngreso);
+                ingresos = ingresos.OrderBy(i => i.nivel.ObtenerTiempoRespuesta(i.nivel.nivelEmergencia(nivelEmergencia))).ToList();
             }
             catch (Exception ex)
             {
                 ex = new Exception(ex.Message.ToString());
             }
-        }   
+        }
+
         public Paciente ObtenerPacienteEnCola(string cuil)
         {
             return dbPacientes.ObtenerPacientePorCuil(cuil);
@@ -74,8 +80,8 @@ namespace ClinicaEmergencia2025BDD.App
                 string fC = row["Frecuencia Cardíaca"];
                 string fr = row["Frecuencia Respiratoria"];
                 string ten = row["Tensión Arterial"];
-                
-                switch(p0)
+
+                switch (p0)
                 {
                     case "Faltan agregar algunos datos.":
                         if (string.IsNullOrWhiteSpace(cuil) || string.IsNullOrWhiteSpace(informe) || string.IsNullOrWhiteSpace(nivel) || string.IsNullOrWhiteSpace(temperatura) || string.IsNullOrWhiteSpace(fC) || string.IsNullOrWhiteSpace(fr) || string.IsNullOrWhiteSpace(ten))
@@ -87,7 +93,7 @@ namespace ClinicaEmergencia2025BDD.App
                         break;
                 }
             }
-            
+
         }
 
         public void ObtenerExcepcionValoreNegativos(string p0, DataTable dataTable)
@@ -96,7 +102,7 @@ namespace ClinicaEmergencia2025BDD.App
             foreach (var row in dataTable.Rows)
             {
                 decimal fC = decimal.Parse(row["Frecuencia Cardíaca"]);
-                decimal fr = decimal.Parse(row["Frecuencia Respiratoria"]);   
+                decimal fr = decimal.Parse(row["Frecuencia Respiratoria"]);
 
                 switch (p0)
                 {
@@ -111,6 +117,11 @@ namespace ClinicaEmergencia2025BDD.App
                 }
             }
 
+        }
+
+        public void colaPrioridad(string ni)
+        {
+            Assert.IsTrue(ingresos.SequenceEqual(ingresos.OrderBy(i => i.nivel.nivelEmergencia(ni))));
         }
     }
 }
