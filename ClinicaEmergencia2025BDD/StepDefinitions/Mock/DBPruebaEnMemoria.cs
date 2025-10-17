@@ -1,6 +1,7 @@
 ﻿using ClinicaEmergencia2025BDD.App.Interfaces;
 using ClinicaEmergencia2025BDD.Modelo;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

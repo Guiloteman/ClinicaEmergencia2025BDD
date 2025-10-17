@@ -22,11 +22,12 @@ namespace ClinicaEmergencia2025BDD.Modelo
         {
             this.nivel = nivelEmergencia(nivel);
         }
-        
-        public int ObtenerTiempoRespuesta(NivelEmergencia nivel)
+
+        public int ObtenerTiempoRespuesta()
         {
             return tiempoRespuesta[nivel];
         }
+
 
         public NivelEmergencia nivelEmergencia(string nivel)
         {

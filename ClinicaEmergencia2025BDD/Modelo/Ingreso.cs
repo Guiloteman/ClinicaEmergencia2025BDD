@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ClinicaEmergencia2025BDD.Modelo
 {
-    internal class Ingreso
+    public class Ingreso
     {
         public int Id { get; set; }
         public Atencion atencion;

@@ -1,6 +1,7 @@
 ﻿using ClinicaEmergencia2025BDD.App.Interfaces;
 using ClinicaEmergencia2025BDD.Modelo;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel.DataCollection;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -13,9 +14,9 @@ namespace ClinicaEmergencia2025BDD.App
     public class ServicioUrgencias
     {
         Exception ex;
-        private RepositorioPacientes dbPacientes;
+        private readonly RepositorioPacientes dbPacientes;
 
-        List<Ingreso> ingresos;
+        private List<Ingreso> ingresos;
         public ServicioUrgencias(RepositorioPacientes repoPacientes)
         {
             dbPacientes = repoPacientes;
@@ -44,12 +45,22 @@ namespace ClinicaEmergencia2025BDD.App
                 nuevoIngreso.frecuenciaRespiratoria = new FrecuenciaRespiratoria(frecuenciaRespiratoria);
                 nuevoIngreso.tensionArterial = new TensionArterial(tensionSistolica, tensionDiastolica);
                 ingresos.Add(nuevoIngreso);
-                ingresos = ingresos.OrderBy(i => i.nivel.ObtenerTiempoRespuesta(i.nivel.nivelEmergencia(nivelEmergencia))).ToList();
+                //ingresos = ingresos.OrderBy(i => i.nivel.ObtenerTiempoRespuesta()).ToList();
+                ingresos = ingresos
+                .OrderBy(i => i.nivel.ObtenerTiempoRespuesta()) // prioridad por tiempo
+                .ThenBy(i => i.FechaIngreso) // orden de llegada
+                .ToList();
             }
             catch (Exception ex)
             {
                 ex = new Exception(ex.Message.ToString());
             }
+        }
+
+
+        public List<Ingreso> ObtenerIngresos()
+        {
+            return ingresos;
         }
 
         public Paciente ObtenerPacienteEnCola(string cuil)

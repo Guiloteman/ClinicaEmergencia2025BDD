@@ -445,14 +445,16 @@ await this.FeatureBackgroundAsync();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Ingreso de paciente a urgencias con atencion por prioriadad")]
+        [NUnit.Framework.DescriptionAttribute("Ingreso de paciente a urgencias con atencion por prioriadad (prioridadad X > prio" +
+            "ridad Y)")]
         [NUnit.Framework.CategoryAttribute("tag5")]
-        public async System.Threading.Tasks.Task IngresoDePacienteAUrgenciasConAtencionPorPrioriadad()
+        public async System.Threading.Tasks.Task IngresoDePacienteAUrgenciasConAtencionPorPrioriadadPrioridadadXPrioridadY()
         {
             string[] tagsOfScenario = new string[] {
                     "tag5"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Ingreso de paciente a urgencias con atencion por prioriadad", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Ingreso de paciente a urgencias con atencion por prioriadad (prioridadad X > prio" +
+                    "ridad Y)", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 73
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -498,14 +500,6 @@ await this.FeatureBackgroundAsync();
                             "Frecuencia Respiratoria",
                             "Tensión Arterial"});
                 table15.AddRow(new string[] {
-                            "20-33333333-8",
-                            "Dolor de cabeza severo",
-                            "UrgenciaMenor",
-                            "37.5",
-                            "80",
-                            "18",
-                            "120/80"});
-                table15.AddRow(new string[] {
                             "20-11111111-3",
                             "Dificultad para respirar",
                             "Urgencia",
@@ -516,11 +510,19 @@ await this.FeatureBackgroundAsync();
                 table15.AddRow(new string[] {
                             "27-22222222-6",
                             "Fractura en brazo",
-                            "Emergencia",
+                            "Urgencia",
                             "36.8",
                             "75",
                             "16",
                             "118/76"});
+                table15.AddRow(new string[] {
+                            "20-33333333-8",
+                            "Dolor de cabeza severo",
+                            "Urgencia",
+                            "37.5",
+                            "80",
+                            "18",
+                            "120/80"});
 #line 79
  await testRunner.WhenAsync("ingresan a urgencias los siguientes pacientes:", ((string)(null)), table15, "When ");
 #line hidden
@@ -528,15 +530,15 @@ await this.FeatureBackgroundAsync();
                             "Cuil",
                             "Nivel de Prioridad"});
                 table16.AddRow(new string[] {
-                            "27-22222222-6",
-                            "Emergencia"});
-                table16.AddRow(new string[] {
                             "20-11111111-3",
                             "Urgencia"});
                 table16.AddRow(new string[] {
+                            "27-22222222-6",
+                            "Urgencia"});
+                table16.AddRow(new string[] {
                             "20-33333333-8",
-                            "UrgenciaMenor"});
-#line 84
+                            "Urgencia"});
+#line 85
  await testRunner.ThenAsync("los pacientes deben ser añadidos a la cola de atencion ordenados por prioridad de" +
                         " la siguiente manera:", ((string)(null)), table16, "Then ");
 #line hidden
