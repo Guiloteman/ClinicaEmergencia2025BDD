@@ -29,5 +29,10 @@ namespace ClinicaEmergencia2025BDD.StepDefinitions.Mock
             }
             return null;
         }
+
+        public string mostrarMensaje()
+        {
+            return "¡Se Cargó con éxito!";
+        }
     }
 }

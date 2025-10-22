@@ -10,5 +10,11 @@
             
             return obraSocial.obtenerObraSocial(obra);
         }
+        public string GeneradorDeNumeroDeAfiliacion()
+        {
+            this.obraSocial = new ObraSocial();
+            string resultado = obraSocial.GeneradorDeNumeroDeAfiliacion();
+            return resultado;
+        }
     }
 }

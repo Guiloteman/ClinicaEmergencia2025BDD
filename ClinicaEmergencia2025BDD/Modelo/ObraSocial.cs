@@ -23,5 +23,21 @@
             }
             return resultado;
         }
+
+        public string GeneradorDeNumeroDeAfiliacion()
+        {
+            // Prefijo opcional
+            string prefijo = "AFI";
+
+            // Fecha actual en formato AAAAMMDD
+            string fecha = DateTime.Now.ToString("ddMMyyyy");
+
+            // Número aleatorio de 5 dígitos
+            Random rnd = new Random();
+            int numeroAleatorio = rnd.Next(10000, 99999);
+
+            // Construir el número de afiliación
+            return $"{prefijo}-{fecha}-{numeroAleatorio}";
+        }
     }
 }
