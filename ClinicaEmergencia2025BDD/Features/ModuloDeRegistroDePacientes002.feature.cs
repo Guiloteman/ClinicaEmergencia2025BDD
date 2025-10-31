@@ -329,6 +329,65 @@ await this.FeatureBackgroundAsync();
             }
             await this.ScenarioCleanupAsync();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Registro de paciente con algun dato mandatorio omitido")]
+        [NUnit.Framework.CategoryAttribute("Escenario5")]
+        public async System.Threading.Tasks.Task RegistroDePacienteConAlgunDatoMandatorioOmitido()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "Escenario5"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Registro de paciente con algun dato mandatorio omitido", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 55
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 9
+await this.FeatureBackgroundAsync();
+#line hidden
+                global::Reqnroll.Table table26 = new global::Reqnroll.Table(new string[] {
+                            "Cuil"});
+                table26.AddRow(new string[] {
+                            "20-99999999-3"});
+#line 56
+ await testRunner.GivenAsync("que no están cargados los pacientes en el sistema se emite el siguiente mensaje: " +
+                        "\"Paciente no registrado. No se puede ingresar a urgencias.\"", ((string)(null)), table26, "Given ");
+#line hidden
+                global::Reqnroll.Table table27 = new global::Reqnroll.Table(new string[] {
+                            "Cuil",
+                            "Apellido",
+                            "Nombre",
+                            "Calle",
+                            "Número",
+                            "Localidad",
+                            "Obra Social",
+                            "Número de Afiliación"});
+                table27.AddRow(new string[] {
+                            "20-99999999-3",
+                            "",
+                            "Alberto",
+                            "Laprida",
+                            "1700",
+                            "S. M. de Tucuman",
+                            "MedLife",
+                            ""});
+#line 59
+ await testRunner.WhenAsync("se cargan los siguientes pacientes:", ((string)(null)), table27, "When ");
+#line hidden
+#line 62
+ await testRunner.ThenAsync("se muestra el siguiente mensaje de error: \"¡Se omitieron algunos datos mandatorio" +
+                        "s!\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
     }
 }
 #pragma warning restore

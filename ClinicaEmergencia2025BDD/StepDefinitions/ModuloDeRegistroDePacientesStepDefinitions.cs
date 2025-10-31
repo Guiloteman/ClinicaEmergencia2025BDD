@@ -5,6 +5,7 @@ using Microsoft.Data.Tools.Schema.Sql.UnitTesting.Configuration;
 using NUnit.Framework;
 using Reqnroll;
 using System;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ClinicaEmergencia2025BDD.StepDefinitions
 {
@@ -39,36 +40,23 @@ namespace ClinicaEmergencia2025BDD.StepDefinitions
             {
                 try
                 {
-                    string cuil = row["Cuil"];
-                    string apellido = row["Apellido"];
+                    string cuil = row["Cuil"].Trim();
+                    string apellido = row["Apellido"].Trim();
                     string nombre = row["Nombre"];
                     string calle = row["Calle"];
                     string numero = row["Número"];
                     string local = row["Localidad"];
                     string obraSocial = row["Obra Social"];
-                    string numAfil = row["Número de Afiliación"];
+                    string numAfil = row["Número de Afiliación"].Trim();
 
                     Paciente paciente = new Paciente(cuil, nombre, apellido, numAfil, obraSocial, calle, numero, local);
-                    
+
                     dbMockeada.GuardarPaciente(paciente);
                     this.mensaje = "¡Se Cargó con éxito!";
                 }
-                catch (Exception e) 
+                catch (Exception e)
                 {
-                    string obraSocial = row["Obra Social"];
-                    string numAfil = row["Número de Afiliación"];
-                    Afiliado afiliado = new Afiliado(numAfil, obraSocial);
-                    
-                    
-                    if (!afiliado.obraSocial.obtenerObraSocial(obraSocial))
-                    {
-                        this.mensaje1 = "¡No se puede registrar al paciente con una obra social inexistente!";
-                    }
-                    else if(!afiliado.obraSocial.corroborarNumeroDeAfiliacion(numAfil))
-                    {
-                        this.mensaje1 = "¡No se puede registrar al paciente dado que no está afiliado a la obra social!";
-                    }
-                    
+                    this.mensaje1 = e.Message;
                 }
             }
         }

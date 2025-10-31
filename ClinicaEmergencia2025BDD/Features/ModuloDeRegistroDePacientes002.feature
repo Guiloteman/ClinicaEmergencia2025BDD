@@ -50,3 +50,13 @@ Scenario: Registro de paciente exitosa con obra social existente pero no esta af
 	| Cuil          | Apellido | Nombre  | Calle   | Número | Localidad        | Obra Social | Número de Afiliación |
 	| 20-99999999-3 | Gonzalez | Alberto | Laprida | 1700   | S. M. de Tucuman | MedLife     | 123456789            |
 	Then se muestra el siguiente mensaje de error: "¡No se puede registrar al paciente dado que no está afiliado a la obra social!"
+
+@Escenario5
+Scenario: Registro de paciente con algun dato mandatorio omitido
+	Given que no están cargados los pacientes en el sistema se emite el siguiente mensaje: "Paciente no registrado. No se puede ingresar a urgencias."
+	| Cuil          |
+	| 20-99999999-3 |
+	When se cargan los siguientes pacientes:
+	| Cuil          | Apellido | Nombre  | Calle   | Número | Localidad        | Obra Social | Número de Afiliación |
+	| 20-99999999-3 |          | Alberto | Laprida | 1700   | S. M. de Tucuman | MedLife     |                      |
+	Then se muestra el siguiente mensaje de error: "¡Se omitieron algunos datos mandatorios!"

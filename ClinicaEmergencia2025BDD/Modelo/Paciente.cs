@@ -9,20 +9,30 @@ namespace ClinicaEmergencia2025BDD.Modelo
         public Domicilio domicilio { get; set; }
         public Paciente(string cuil, string nombre, string apellido, string numAfil, string obra, string calle, string numero, string localidad) : base(cuil, nombre, apellido)
         {
+            if (string.IsNullOrWhiteSpace(cuil) ||
+                string.IsNullOrWhiteSpace(nombre) ||
+                string.IsNullOrWhiteSpace(apellido) ||
+                string.IsNullOrWhiteSpace(calle) ||
+                string.IsNullOrWhiteSpace(numero) ||
+                string.IsNullOrWhiteSpace(localidad))
+            {
+                throw new Exception("¡Se omitieron algunos datos mandatorios!");
+            }
             this.afiliado = new Afiliado(numAfil, obra);
-            if (afiliado.obraSocial.obtenerObraSocial(obra) && afiliado.obraSocial.corroborarNumeroDeAfiliacion(numAfil))
+
+            bool obraSocialExiste = this.afiliado.obraSocial.obtenerObraSocial(obra);
+            bool afiliadoValido = this.afiliado.obraSocial.corroborarNumeroDeAfiliacion(numAfil);
+
+            if (!obraSocialExiste)
             {
-                this.cuil = cuil;
-                this.nombre = nombre;
-                this.apellido = apellido;
-                this.afiliado = new Afiliado(numAfil, obra);
-                this.domicilio = new Domicilio(calle, numero, localidad);
-                
+                throw new Exception("¡No se puede registrar al paciente con una obra social inexistente!");
             }
-            else
+
+            if (obraSocialExiste && !afiliadoValido)
             {
-                throw new Exception("Error al intentar cargar los datos del paciente: Obra Social o número de afiliación inválido.");
+                throw new Exception("¡No se puede registrar al paciente dado que no está afiliado a la obra social!");
             }
+            this.domicilio = new Domicilio(calle, numero, localidad);
         }
 
         public Paciente(string cuil, string nombre, string apellido) : base(cuil, nombre, apellido)
