@@ -3,18 +3,10 @@
     public class Afiliado
     {
         public ObraSocial obraSocial { get; set; }
-        public string numeroAfiliado { get; set; }
-        public string obtenerObraSocial(string obra)
+
+        public Afiliado(string numAfil, string obra) 
         {
-            obraSocial = new ObraSocial();
-            
-            return obraSocial.obtenerObraSocial(obra);
-        }
-        public string GeneradorDeNumeroDeAfiliacion()
-        {
-            this.obraSocial = new ObraSocial();
-            string resultado = obraSocial.GeneradorDeNumeroDeAfiliacion();
-            return resultado;
+            obraSocial = new ObraSocial(numAfil, obra);
         }
     }
 }

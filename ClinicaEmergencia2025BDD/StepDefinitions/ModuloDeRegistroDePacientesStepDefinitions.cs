@@ -1,6 +1,7 @@
 using ClinicaEmergencia2025BDD.App;
 using ClinicaEmergencia2025BDD.Modelo;
 using ClinicaEmergencia2025BDD.StepDefinitions.Mock;
+using Microsoft.Data.Tools.Schema.Sql.UnitTesting.Configuration;
 using NUnit.Framework;
 using Reqnroll;
 using System;
@@ -12,7 +13,9 @@ namespace ClinicaEmergencia2025BDD.StepDefinitions
     {
         private DBPruebaEnMemoria dbMockeada;
         private ServicioUrgencias servicioUrgencias;
-
+        private string mensaje = "";
+        private string mensaje1 = "";
+        
         public ModuloDeRegistroDePacientesStepDefinitions()
         {
             dbMockeada = new DBPruebaEnMemoria();
@@ -34,35 +37,78 @@ namespace ClinicaEmergencia2025BDD.StepDefinitions
         {
             foreach (var row in dataTable.Rows)
             {
-                string cuil = row["Cuil"];
-                string apellido = row["Apellido"];
-                string nombre = row["Nombre"];
-                string calle = row["Calle"];
-                string numero = row["Número"];
-                string local = row["Localidad"];
-                string obraSocial = row["Obra Social"];
-                string numAfil = row["Número de Afiliación"];
-                Paciente paciente = new Paciente();
-                paciente.cuil = cuil;
-                paciente.apellido = apellido;
-                paciente.nombre = nombre;
-                Domicilio domicilio = new Domicilio();
-                domicilio.calle = calle;
-                domicilio.numero = numero;
-                domicilio.localidad = local;
-                paciente.obtenerObraSocial(obraSocial);
-                numAfil = "AFI-21/10/2025-20000";
-                Afiliado afiliado = new Afiliado();
-                afiliado.numeroAfiliado = numAfil;
-                dbMockeada.GuardarPaciente(paciente);
+                try
+                {
+                    string cuil = row["Cuil"];
+                    string apellido = row["Apellido"];
+                    string nombre = row["Nombre"];
+                    string calle = row["Calle"];
+                    string numero = row["Número"];
+                    string local = row["Localidad"];
+                    string obraSocial = row["Obra Social"];
+                    string numAfil = row["Número de Afiliación"];
+
+                    Paciente paciente = new Paciente(cuil, nombre, apellido, numAfil, obraSocial, calle, numero, local);
+                    
+                    dbMockeada.GuardarPaciente(paciente);
+                    this.mensaje = "¡Se Cargó con éxito!";
+                }
+                catch (Exception e) 
+                {
+                    string obraSocial = row["Obra Social"];
+                    string numAfil = row["Número de Afiliación"];
+                    Afiliado afiliado = new Afiliado(numAfil, obraSocial);
+                    
+                    
+                    if (!afiliado.obraSocial.obtenerObraSocial(obraSocial))
+                    {
+                        this.mensaje1 = "¡No se puede registrar al paciente con una obra social inexistente!";
+                    }
+                    else if(!afiliado.obraSocial.corroborarNumeroDeAfiliacion(numAfil))
+                    {
+                        this.mensaje1 = "¡No se puede registrar al paciente dado que no está afiliado a la obra social!";
+                    }
+                    
+                }
+            }
+        }
+
+        [When("se cargan los siguientes pacientes sin obra social:")]
+        public void WhenSeCarganLosSiguientesPacientesSinObraSocial(DataTable dataTable)
+        {
+            foreach (var row in dataTable.Rows)
+            {
+                try
+                {
+                    string cuil = row["Cuil"];
+                    string apellido = row["Apellido"];
+                    string nombre = row["Nombre"];
+                    string calle = row["Calle"];
+                    string numero = row["Número"];
+                    string local = row["Localidad"];
+
+                    Paciente paciente = new Paciente(cuil, nombre, apellido, calle, numero, local);
+
+                    dbMockeada.GuardarPaciente(paciente);
+                    this.mensaje = "¡Se Cargó con éxito!";
+                }
+                catch (Exception e)
+                {
+                    this.mensaje1 = "¡No se puede registrar al paciente con una obra social inexistente!";
+                }
             }
         }
 
         [Then("se muestra el siguiente mensaje: {string}")]
         public void ThenSeMuestraElSiguienteMensaje(string p0)
         {
-            string mensaje = dbMockeada.mostrarMensaje();
-            Assert.AreEqual(mensaje, p0);
+            Assert.AreEqual(this.mensaje, p0);
+        }
+
+        [Then("se muestra el siguiente mensaje de error: {string}")]
+        public void ThenSeMuestraElSiguienteMensajeDeError(string p0)
+        {
+            Assert.AreEqual(this.mensaje1, p0);
         }
     }
 }

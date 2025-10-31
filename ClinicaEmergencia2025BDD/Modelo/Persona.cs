@@ -12,5 +12,12 @@ namespace ClinicaEmergencia2025BDD.Modelo
         public string nombre { get; set; }
         public string apellido { get; set; }
         public string email { get; set; }
+
+        public Persona(string cuil, string nombre, string apellido) 
+        {
+            this.cuil = cuil;
+            this.nombre = nombre;
+            this.apellido = apellido;
+        }    
     }
 }

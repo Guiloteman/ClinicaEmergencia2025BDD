@@ -20,7 +20,7 @@ namespace ClinicaEmergencia2025BDD.App
         public ServicioUrgencias(RepositorioPacientes repoPacientes)
         {
             dbPacientes = repoPacientes;
-             ingresos = new List<Ingreso>();
+            ingresos = new List<Ingreso>();
         }
         public void RegistrarUrgencia(string cuilPaciente,
                                       Enfermera enfermera,
@@ -45,7 +45,6 @@ namespace ClinicaEmergencia2025BDD.App
                 nuevoIngreso.frecuenciaRespiratoria = new FrecuenciaRespiratoria(frecuenciaRespiratoria);
                 nuevoIngreso.tensionArterial = new TensionArterial(tensionSistolica, tensionDiastolica);
                 ingresos.Add(nuevoIngreso);
-                //ingresos = ingresos.OrderBy(i => i.nivel.ObtenerTiempoRespuesta()).ToList();
                 ingresos = ingresos
                 .OrderBy(i => i.nivel.ObtenerTiempoRespuesta()) // prioridad por tiempo
                 .ThenBy(i => i.FechaIngreso) // orden de llegada

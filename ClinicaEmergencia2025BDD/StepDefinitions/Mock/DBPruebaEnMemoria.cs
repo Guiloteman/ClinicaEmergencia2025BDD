@@ -16,6 +16,7 @@ namespace ClinicaEmergencia2025BDD.StepDefinitions.Mock
         {
             pacientes = new Dictionary<string, Paciente>();
         }
+
         public void GuardarPaciente(Paciente paciente)
         {
             pacientes.Add(paciente.cuil, paciente);
@@ -28,11 +29,6 @@ namespace ClinicaEmergencia2025BDD.StepDefinitions.Mock
                 return pacientes[cuil];
             }
             return null;
-        }
-
-        public string mostrarMensaje()
-        {
-            return "¡Se Cargó con éxito!";
         }
     }
 }

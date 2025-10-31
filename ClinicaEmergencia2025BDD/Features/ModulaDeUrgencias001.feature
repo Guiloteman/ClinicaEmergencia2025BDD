@@ -5,17 +5,17 @@ Quiero porder registrar las admisiones de los pacientes a emergencias
 Para determinar que pacientes tienen mayor prioridad de atención
 
 Background: 
-	Given que la siguiente enfermera esta registrada:
-		| Nombre | Apellido |
-		| Ana    | Perez    |
+	Given que la siguiente enfermera esta registradaaa:
+		| Cuil              | Nombre | Apellido |
+		| 23-12345678-8     | Ana    | Perez    |
 
 @tag1
 Scenario: Ingreso de paciente a la lista de espera de emergencias
 	Given que estan registrados los siguientes pacientes:
-		| Cuil          | Nombre | Apellido | Obra Social |
-		| 20-11111111-3 | Juan   | Gomez    | Galeno      |
-		| 27-22222222-6 | Maria  | Lopez    | MedLife     |
-		| 20-33333333-8 | Carlos | Sanchez  | OSDE        |
+		| Cuil          | Nombre | Apellido |
+		| 20-11111111-3 | Juan   | Gomez    |
+		| 27-22222222-6 | Maria  | Lopez    |
+		| 20-33333333-8 | Carlos | Sanchez  |
 	When ingresan a urgencias los siguientes pacientes:
 		| Cuil          | Informe                  | Nivel de Emergencia | Temperatura | Frecuencia Cardíaca | Frecuencia Respiratoria | Tensión Arterial |
 		| 20-11111111-3 | Dolor de cabeza severo   | 3                   | 37.5        | 80                  | 18                      | 120/80           |
@@ -80,43 +80,10 @@ Scenario: Ingreso de paciente a urgencias con atencion por prioriadad (prioridad
 		| Cuil          | Informe                  | Nivel de Emergencia | Temperatura | Frecuencia Cardíaca | Frecuencia Respiratoria | Tensión Arterial |
 		
 		| 20-11111111-3 | Dificultad para respirar | Urgencia            | 38.2        | 95                  | 22                      | 130/85           |
-		| 27-22222222-6 | Fractura en brazo        | Urgencia          | 36.8        | 75                  | 16                      | 118/76           |
-		| 20-33333333-8 | Dolor de cabeza severo   | Urgencia       | 37.5        | 80                  | 18                      | 120/80           |
+		| 27-22222222-6 | Fractura en brazo        | Urgencia            | 36.8        | 75                  | 16                      | 118/76           |
+		| 20-33333333-8 | Dolor de cabeza severo   | Urgencia            | 37.5        | 80                  | 18                      | 120/80           |
 	Then los pacientes deben ser añadidos a la cola de atencion ordenados por prioridad de la siguiente manera:
 		| Cuil          | Nivel de Prioridad |
-		| 20-11111111-3 | Urgencia         |
+		| 20-11111111-3 | Urgencia           |
 		| 27-22222222-6 | Urgencia           |
-		| 20-33333333-8 | Urgencia      |
-		
-		
-#@tag6
-#Scenario: Ingreso de paciente a urgencias con atencion por prioriadad (prioridadad X < prioridad Y)	
-#	Given que estan registrados los siguientes pacientes:
-#		| Cuil          | Nombre | Apellido | Obra Social |
-#		| 20-11111111-3 | Juan   | Gomez    | Galeno      |
-#		| 27-22222222-6 | Maria  | Lopez    | MedLife     |
-#		| 20-33333333-8 | Carlos | Sanchez  | OSDE        |
-#	When ingresan a urgencias los siguientes pacientes:
-#		| Cuil          | Informe                  | Nivel de Emergencia | Temperatura | Frecuencia Cardíaca | Frecuencia Respiratoria | Tensión Arterial |
-#		| 27-22222222-6 | Fractura en brazo        | Emergencia          | 36.8        | 75                  | 16                      | 118/76           |
-#		| 20-11111111-3 | Dificultad para respirar | Urgencia            | 38.2        | 95                  | 22                      | 130/85           |
-#	Then los pacientes deben ser añadidos a la cola de atencion ordenados por prioridad de la siguiente manera:
-#		| Cuil          | Nivel de Prioridad |
-#		| 27-22222222-6 | Emergencia         |
-#		| 20-11111111-3 | Urgencia           |
-#
-#@tag7
-#Scenario: Ingreso de paciente a urgencias con atencion por prioriadad (prioridadad X = prioridad Y)	
-#	Given que estan registrados los siguientes pacientes:
-#		| Cuil          | Nombre | Apellido | Obra Social |
-#		| 20-11111111-3 | Juan   | Gomez    | Galeno      |
-#		| 27-22222222-6 | Maria  | Lopez    | MedLife     |
-#		| 20-33333333-8 | Carlos | Sanchez  | OSDE        |
-#	When ingresan a urgencias los siguientes pacientes:
-#		| Cuil          | Informe                  | Nivel de Emergencia | Temperatura | Frecuencia Cardíaca | Frecuencia Respiratoria | Tensión Arterial |
-#		| 27-22222222-6 | Fractura en brazo        | Emergencia          | 36.8        | 75                  | 16                      | 118/76           |
-#		| 20-11111111-3 | Dificultad para respirar | Emergencia          | 38.2        | 95                  | 22                      | 130/85           |
-#	Then los pacientes deben ser añadidos a la cola de atencion ordenados por prioridad de la siguiente manera:
-#		| Cuil          | Nivel de Prioridad |
-#		| 27-22222222-6 | Emergencia         |
-#		| 20-11111111-3 | Emergencia         |
+		| 20-33333333-8 | Urgencia           |

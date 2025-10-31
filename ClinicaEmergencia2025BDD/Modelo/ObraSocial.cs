@@ -1,4 +1,6 @@
-﻿namespace ClinicaEmergencia2025BDD.Modelo
+﻿using NUnit.Framework;
+
+namespace ClinicaEmergencia2025BDD.Modelo
 {
     public class ObraSocial
     {
@@ -10,34 +12,46 @@
             { 4, "MedLife" },
             { 5, "PAMI" }
         };
-        public string obtenerObraSocial(string obra)
+
+        public Dictionary<int, string> numeroAfiliacionObrasSociales = new Dictionary<int, string>()
+        {
+            { 1, "AFI_OSDE_01/10/2025_0000000001" },
+            { 2, "AFI_Swiss_Medical_03/10/2025_0000000002" },
+            { 3, "AFI_Galeno_11/10/2025_0000000003" },
+            { 4, "AFI_MedLife_15/10/2025_0000000004" },
+            { 5, "AFI_PAMI_19/10/2025_0000000005" }
+        };
+
+        public ObraSocial(string numAfil, string obra)
+        {
+        }
+        public bool obtenerObraSocial(string obra)
+        {
+            return obrasSociales.ContainsValue(obra);
+        }
+
+        public bool corroborarNumeroDeAfiliacion(string numAfil) 
+        {
+            return numeroAfiliacionObrasSociales.ContainsValue(numAfil);
+        }
+
+        public string obraSocial(string obra)
         {
             string resultado = "";
-            foreach (var item in obrasSociales)
+            try
             {
-                if (item.Value == obra)
+                foreach (var item in obrasSociales)
                 {
                     resultado = item.Value;
                     break;
                 }
+                return resultado;
+            }
+            catch (Exception ex) 
+            {
+                new Exception(ex.ToString());
             }
             return resultado;
-        }
-
-        public string GeneradorDeNumeroDeAfiliacion()
-        {
-            // Prefijo opcional
-            string prefijo = "AFI";
-
-            // Fecha actual en formato AAAAMMDD
-            string fecha = DateTime.Now.ToString("ddMMyyyy");
-
-            // Número aleatorio de 5 dígitos
-            Random rnd = new Random();
-            int numeroAleatorio = rnd.Next(10000, 99999);
-
-            // Construir el número de afiliación
-            return $"{prefijo}-{fecha}-{numeroAleatorio}";
         }
     }
 }

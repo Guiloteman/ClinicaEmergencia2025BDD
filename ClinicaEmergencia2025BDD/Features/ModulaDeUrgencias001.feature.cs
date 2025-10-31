@@ -87,13 +87,15 @@ namespace ClinicaEmergencia2025BDD.Features
 #line 7
 #line hidden
             global::Reqnroll.Table table1 = new global::Reqnroll.Table(new string[] {
+                        "Cuil",
                         "Nombre",
                         "Apellido"});
             table1.AddRow(new string[] {
+                        "23-12345678-8",
                         "Ana",
                         "Perez"});
 #line 8
- await testRunner.GivenAsync("que la siguiente enfermera esta registrada:", ((string)(null)), table1, "Given ");
+ await testRunner.GivenAsync("que la siguiente enfermera esta registradaaa:", ((string)(null)), table1, "Given ");
 #line hidden
         }
         
@@ -122,23 +124,19 @@ await this.FeatureBackgroundAsync();
                 global::Reqnroll.Table table2 = new global::Reqnroll.Table(new string[] {
                             "Cuil",
                             "Nombre",
-                            "Apellido",
-                            "Obra Social"});
+                            "Apellido"});
                 table2.AddRow(new string[] {
                             "20-11111111-3",
                             "Juan",
-                            "Gomez",
-                            "Galeno"});
+                            "Gomez"});
                 table2.AddRow(new string[] {
                             "27-22222222-6",
                             "Maria",
-                            "Lopez",
-                            "MedLife"});
+                            "Lopez"});
                 table2.AddRow(new string[] {
                             "20-33333333-8",
                             "Carlos",
-                            "Sanchez",
-                            "OSDE"});
+                            "Sanchez"});
 #line 14
  await testRunner.GivenAsync("que estan registrados los siguientes pacientes:", ((string)(null)), table2, "Given ");
 #line hidden

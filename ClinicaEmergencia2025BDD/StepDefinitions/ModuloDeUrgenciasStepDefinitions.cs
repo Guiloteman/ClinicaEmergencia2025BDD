@@ -2,6 +2,7 @@ using System;
 using ClinicaEmergencia2025BDD.App;
 using ClinicaEmergencia2025BDD.Modelo;
 using ClinicaEmergencia2025BDD.StepDefinitions.Mock;
+using Microsoft.IdentityModel.Tokens;
 using NUnit.Framework;
 using Reqnroll;
 
@@ -20,30 +21,30 @@ namespace ClinicaEmergencia2025BDD.StepDefinitions
             servicioUrgencias = new ServicioUrgencias(dbMockeada);
         }
 
-        [Given("que la siguiente enfermera esta registrada:")]
-        public void GivenQueLaSiguienteEnfermeraEstaRegistrada(DataTable dataTable)
+        [Given("que la siguiente enfermera esta registradaaa:")]
+        public void GivenQueLaSiguienteEnfermeraEstaRegistradaaa(DataTable dataTable)
         {
-            string nombre = dataTable.Rows[0]["Nombre"];
-            string apellido = dataTable.Rows[0]["Apellido"];
-            enfermera = new Enfermera();
-            enfermera.nombre = nombre;
-            enfermera.apellido = apellido;
+            foreach (var item in dataTable.Rows)
+            {
+                var cuil = item["Cuil"];
+                var nombre = item["Nombre"];
+                var apellido = item["Apellido"];
+                Enfermera enfermera = new Enfermera(cuil, nombre, apellido);
+            }
         }
 
         [Given("que estan registrados los siguientes pacientes:")]
         public void GivenQueEstanRegistradosLosSiguientesPacientes(DataTable dataTable)
         {
+            string obra = "";
             foreach (var row in dataTable.Rows)
             {
                 string nombre = row["Nombre"];
                 string apellido = row["Apellido"];
                 string cuil = row["Cuil"];
-                string obraSocial = row["Obra Social"];
-                Paciente paciente = new Paciente();
-                paciente.nombre = nombre;
-                paciente.apellido = apellido;
-                paciente.cuil = cuil;
-                paciente.obtenerObraSocial(obraSocial);
+                
+               
+                Paciente paciente = new Paciente(cuil, nombre, apellido);
                 dbMockeada.GuardarPaciente(paciente);
             }
         }
@@ -58,10 +59,10 @@ namespace ClinicaEmergencia2025BDD.StepDefinitions
                 string nivelEmergencia = row["Nivel de Emergencia"];
                 string informe = row["Informe"];
                 decimal temperatura = decimal.Parse(row["Temperatura"]);
-                decimal frecuenciaCardiaca = decimal.Parse(row["Frecuencia CardÃ­aca"]);
+                decimal frecuenciaCardiaca = decimal.Parse(row["Frecuencia Cardíaca"]);
                 decimal frecuenciaRespiratoria = decimal.Parse(row["Frecuencia Respiratoria"]);
-                decimal tensionSistolica = decimal.Parse(row["TensiÃ³n Arterial"].ToString().Split('/')[0]);
-                decimal tensionDiastolica = decimal.Parse(row["TensiÃ³n Arterial"].ToString().Split('/')[1]);
+                decimal tensionSistolica = decimal.Parse(row["Tensión Arterial"].ToString().Split('/')[0]);
+                decimal tensionDiastolica = decimal.Parse(row["Tensión Arterial"].ToString().Split('/')[1]);
                 try
                 {
                     servicioUrgencias.RegistrarUrgencia(cuil, enfermera, nivelEmergencia, informe, temperatura, frecuenciaCardiaca, frecuenciaRespiratoria, tensionSistolica, tensionDiastolica);
@@ -74,7 +75,7 @@ namespace ClinicaEmergencia2025BDD.StepDefinitions
             }
         }
 
-        [Then("los pacientes deben ser aÃ±adidos a la cola de atencion ordenados por cuil de la siguiente manera:")]
+        [Then("los pacientes deben ser añadidos a la cola de atencion ordenados por cuil de la siguiente manera:")]
         public void ThenLosPacientesDebenSerAnadidosALaColaDeAtencionOrdenadosPorCuilDeLaSiguienteManera(DataTable dataTable)
         {
             foreach (var row in dataTable.Rows)
@@ -99,7 +100,7 @@ namespace ClinicaEmergencia2025BDD.StepDefinitions
             servicioUrgencias.ObtenerExcepcionValoreNegativos(p0, dataTable);
         }
 
-        [Then("los pacientes deben ser aÃ±adidos a la cola de atencion ordenados por prioridad de la siguiente manera:")]
+        [Then("los pacientes deben ser añadidos a la cola de atencion ordenados por prioridad de la siguiente manera:")]
         public void ThenLosPacientesDebenSerAnadidosALaColaDeAtencionOrdenadosPorPrioridadDeLaSiguienteManera(DataTable dataTable)
         {
             var ingresos = servicioUrgencias.ObtenerIngresos();

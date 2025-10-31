@@ -88,25 +88,27 @@ namespace ClinicaEmergencia2025BDD.Features
 #line 9
 #line hidden
             global::Reqnroll.Table table17 = new global::Reqnroll.Table(new string[] {
+                        "Cuil",
                         "Nombre",
                         "Apellido"});
             table17.AddRow(new string[] {
+                        "23-12345678-8",
                         "Ana",
                         "Perez"});
 #line 10
- await testRunner.GivenAsync("que la siguiente enfermera esta registrada:", ((string)(null)), table17, "Given ");
+ await testRunner.GivenAsync("que la siguiente enfermera esta registradaaa:", ((string)(null)), table17, "Given ");
 #line hidden
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Registro de paciente exitosa")]
+        [NUnit.Framework.DescriptionAttribute("Registro de paciente exitosa con obra social")]
         [NUnit.Framework.CategoryAttribute("Escenario1")]
-        public async System.Threading.Tasks.Task RegistroDePacienteExitosa()
+        public async System.Threading.Tasks.Task RegistroDePacienteExitosaConObraSocial()
         {
             string[] tagsOfScenario = new string[] {
                     "Escenario1"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Registro de paciente exitosa", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Registro de paciente exitosa con obra social", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 15
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -145,12 +147,184 @@ await this.FeatureBackgroundAsync();
                             "1700",
                             "S. M. de Tucuman",
                             "MedLife",
-                            "AFI-21/10/2025-20000"});
+                            "AFI_OSDE_01/10/2025_0000000001"});
 #line 19
  await testRunner.WhenAsync("se cargan los siguientes pacientes:", ((string)(null)), table19, "When ");
 #line hidden
 #line 22
  await testRunner.ThenAsync("se muestra el siguiente mensaje: \"¡Se Cargó con éxito!\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Registro de paciente exitosa sin obra social")]
+        [NUnit.Framework.CategoryAttribute("Escenario2")]
+        public async System.Threading.Tasks.Task RegistroDePacienteExitosaSinObraSocial()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "Escenario2"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Registro de paciente exitosa sin obra social", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 25
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 9
+await this.FeatureBackgroundAsync();
+#line hidden
+                global::Reqnroll.Table table20 = new global::Reqnroll.Table(new string[] {
+                            "Cuil"});
+                table20.AddRow(new string[] {
+                            "20-99999999-3"});
+#line 26
+ await testRunner.GivenAsync("que no están cargados los pacientes en el sistema se emite el siguiente mensaje: " +
+                        "\"Paciente no registrado. No se puede ingresar a urgencias.\"", ((string)(null)), table20, "Given ");
+#line hidden
+                global::Reqnroll.Table table21 = new global::Reqnroll.Table(new string[] {
+                            "Cuil",
+                            "Apellido",
+                            "Nombre",
+                            "Calle",
+                            "Número",
+                            "Localidad"});
+                table21.AddRow(new string[] {
+                            "20-99999999-3",
+                            "Gonzalez",
+                            "Alberto",
+                            "Laprida",
+                            "1700",
+                            "S. M. de Tucuman"});
+#line 29
+ await testRunner.WhenAsync("se cargan los siguientes pacientes sin obra social:", ((string)(null)), table21, "When ");
+#line hidden
+#line 32
+ await testRunner.ThenAsync("se muestra el siguiente mensaje: \"¡Se Cargó con éxito!\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Registro de paciente exitosa con obra social inexistente")]
+        [NUnit.Framework.CategoryAttribute("Escenario3")]
+        public async System.Threading.Tasks.Task RegistroDePacienteExitosaConObraSocialInexistente()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "Escenario3"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Registro de paciente exitosa con obra social inexistente", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 35
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 9
+await this.FeatureBackgroundAsync();
+#line hidden
+                global::Reqnroll.Table table22 = new global::Reqnroll.Table(new string[] {
+                            "Cuil"});
+                table22.AddRow(new string[] {
+                            "20-99999999-3"});
+#line 36
+ await testRunner.GivenAsync("que no están cargados los pacientes en el sistema se emite el siguiente mensaje: " +
+                        "\"Paciente no registrado. No se puede ingresar a urgencias.\"", ((string)(null)), table22, "Given ");
+#line hidden
+                global::Reqnroll.Table table23 = new global::Reqnroll.Table(new string[] {
+                            "Cuil",
+                            "Apellido",
+                            "Nombre",
+                            "Calle",
+                            "Número",
+                            "Localidad",
+                            "Obra Social",
+                            "Número de Afiliación"});
+                table23.AddRow(new string[] {
+                            "20-99999999-3",
+                            "Gonzalez",
+                            "Alberto",
+                            "Laprida",
+                            "1700",
+                            "S. M. de Tucuman",
+                            "Carmelo Salud",
+                            "1234567899"});
+#line 39
+ await testRunner.WhenAsync("se cargan los siguientes pacientes:", ((string)(null)), table23, "When ");
+#line hidden
+#line 42
+ await testRunner.ThenAsync("se muestra el siguiente mensaje de error: \"¡No se puede registrar al paciente con" +
+                        " una obra social inexistente!\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Registro de paciente exitosa con obra social existente pero no esta afiliado")]
+        [NUnit.Framework.CategoryAttribute("Escenario4")]
+        public async System.Threading.Tasks.Task RegistroDePacienteExitosaConObraSocialExistentePeroNoEstaAfiliado()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "Escenario4"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Registro de paciente exitosa con obra social existente pero no esta afiliado", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 45
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 9
+await this.FeatureBackgroundAsync();
+#line hidden
+                global::Reqnroll.Table table24 = new global::Reqnroll.Table(new string[] {
+                            "Cuil"});
+                table24.AddRow(new string[] {
+                            "20-99999999-3"});
+#line 46
+ await testRunner.GivenAsync("que no están cargados los pacientes en el sistema se emite el siguiente mensaje: " +
+                        "\"Paciente no registrado. No se puede ingresar a urgencias.\"", ((string)(null)), table24, "Given ");
+#line hidden
+                global::Reqnroll.Table table25 = new global::Reqnroll.Table(new string[] {
+                            "Cuil",
+                            "Apellido",
+                            "Nombre",
+                            "Calle",
+                            "Número",
+                            "Localidad",
+                            "Obra Social",
+                            "Número de Afiliación"});
+                table25.AddRow(new string[] {
+                            "20-99999999-3",
+                            "Gonzalez",
+                            "Alberto",
+                            "Laprida",
+                            "1700",
+                            "S. M. de Tucuman",
+                            "MedLife",
+                            "123456789"});
+#line 49
+ await testRunner.WhenAsync("se cargan los siguientes pacientes:", ((string)(null)), table25, "When ");
+#line hidden
+#line 52
+ await testRunner.ThenAsync("se muestra el siguiente mensaje de error: \"¡No se puede registrar al paciente dad" +
+                        "o que no está afiliado a la obra social!\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
