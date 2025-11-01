@@ -87,16 +87,16 @@ namespace ClinicaEmergencia2025BDD.Features
         {
 #line 9
 #line hidden
-            global::Reqnroll.Table table17 = new global::Reqnroll.Table(new string[] {
+            global::Reqnroll.Table table21 = new global::Reqnroll.Table(new string[] {
                         "Cuil",
                         "Nombre",
                         "Apellido"});
-            table17.AddRow(new string[] {
+            table21.AddRow(new string[] {
                         "23-12345678-8",
                         "Ana",
                         "Perez"});
 #line 10
- await testRunner.GivenAsync("que la siguiente enfermera esta registradaaa:", ((string)(null)), table17, "Given ");
+ await testRunner.GivenAsync("que la siguiente enfermera esta registradaaa:", ((string)(null)), table21, "Given ");
 #line hidden
         }
         
@@ -122,15 +122,15 @@ this.ScenarioInitialize(scenarioInfo);
 #line 9
 await this.FeatureBackgroundAsync();
 #line hidden
-                global::Reqnroll.Table table18 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table22 = new global::Reqnroll.Table(new string[] {
                             "Cuil"});
-                table18.AddRow(new string[] {
+                table22.AddRow(new string[] {
                             "20-99999999-3"});
 #line 16
  await testRunner.GivenAsync("que no están cargados los pacientes en el sistema se emite el siguiente mensaje: " +
-                        "\"Paciente no registrado. No se puede ingresar a urgencias.\"", ((string)(null)), table18, "Given ");
+                        "\"Paciente no registrado. No se puede ingresar a urgencias.\"", ((string)(null)), table22, "Given ");
 #line hidden
-                global::Reqnroll.Table table19 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table23 = new global::Reqnroll.Table(new string[] {
                             "Cuil",
                             "Apellido",
                             "Nombre",
@@ -139,7 +139,7 @@ await this.FeatureBackgroundAsync();
                             "Localidad",
                             "Obra Social",
                             "Número de Afiliación"});
-                table19.AddRow(new string[] {
+                table23.AddRow(new string[] {
                             "20-99999999-3",
                             "Gonzalez",
                             "Alberto",
@@ -149,7 +149,7 @@ await this.FeatureBackgroundAsync();
                             "MedLife",
                             "AFI_OSDE_01/10/2025_0000000001"});
 #line 19
- await testRunner.WhenAsync("se cargan los siguientes pacientes:", ((string)(null)), table19, "When ");
+ await testRunner.WhenAsync("se cargan los siguientes pacientes:", ((string)(null)), table23, "When ");
 #line hidden
 #line 22
  await testRunner.ThenAsync("se muestra el siguiente mensaje: \"¡Se Cargó con éxito!\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -180,22 +180,22 @@ this.ScenarioInitialize(scenarioInfo);
 #line 9
 await this.FeatureBackgroundAsync();
 #line hidden
-                global::Reqnroll.Table table20 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table24 = new global::Reqnroll.Table(new string[] {
                             "Cuil"});
-                table20.AddRow(new string[] {
+                table24.AddRow(new string[] {
                             "20-99999999-3"});
 #line 26
  await testRunner.GivenAsync("que no están cargados los pacientes en el sistema se emite el siguiente mensaje: " +
-                        "\"Paciente no registrado. No se puede ingresar a urgencias.\"", ((string)(null)), table20, "Given ");
+                        "\"Paciente no registrado. No se puede ingresar a urgencias.\"", ((string)(null)), table24, "Given ");
 #line hidden
-                global::Reqnroll.Table table21 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table25 = new global::Reqnroll.Table(new string[] {
                             "Cuil",
                             "Apellido",
                             "Nombre",
                             "Calle",
                             "Número",
                             "Localidad"});
-                table21.AddRow(new string[] {
+                table25.AddRow(new string[] {
                             "20-99999999-3",
                             "Gonzalez",
                             "Alberto",
@@ -203,7 +203,7 @@ await this.FeatureBackgroundAsync();
                             "1700",
                             "S. M. de Tucuman"});
 #line 29
- await testRunner.WhenAsync("se cargan los siguientes pacientes sin obra social:", ((string)(null)), table21, "When ");
+ await testRunner.WhenAsync("se cargan los siguientes pacientes sin obra social:", ((string)(null)), table25, "When ");
 #line hidden
 #line 32
  await testRunner.ThenAsync("se muestra el siguiente mensaje: \"¡Se Cargó con éxito!\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
@@ -234,15 +234,15 @@ this.ScenarioInitialize(scenarioInfo);
 #line 9
 await this.FeatureBackgroundAsync();
 #line hidden
-                global::Reqnroll.Table table22 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table26 = new global::Reqnroll.Table(new string[] {
                             "Cuil"});
-                table22.AddRow(new string[] {
+                table26.AddRow(new string[] {
                             "20-99999999-3"});
 #line 36
  await testRunner.GivenAsync("que no están cargados los pacientes en el sistema se emite el siguiente mensaje: " +
-                        "\"Paciente no registrado. No se puede ingresar a urgencias.\"", ((string)(null)), table22, "Given ");
+                        "\"Paciente no registrado. No se puede ingresar a urgencias.\"", ((string)(null)), table26, "Given ");
 #line hidden
-                global::Reqnroll.Table table23 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table27 = new global::Reqnroll.Table(new string[] {
                             "Cuil",
                             "Apellido",
                             "Nombre",
@@ -251,7 +251,7 @@ await this.FeatureBackgroundAsync();
                             "Localidad",
                             "Obra Social",
                             "Número de Afiliación"});
-                table23.AddRow(new string[] {
+                table27.AddRow(new string[] {
                             "20-99999999-3",
                             "Gonzalez",
                             "Alberto",
@@ -261,7 +261,7 @@ await this.FeatureBackgroundAsync();
                             "Carmelo Salud",
                             "1234567899"});
 #line 39
- await testRunner.WhenAsync("se cargan los siguientes pacientes:", ((string)(null)), table23, "When ");
+ await testRunner.WhenAsync("se cargan los siguientes pacientes:", ((string)(null)), table27, "When ");
 #line hidden
 #line 42
  await testRunner.ThenAsync("se muestra el siguiente mensaje de error: \"¡No se puede registrar al paciente con" +
@@ -293,15 +293,15 @@ this.ScenarioInitialize(scenarioInfo);
 #line 9
 await this.FeatureBackgroundAsync();
 #line hidden
-                global::Reqnroll.Table table24 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table28 = new global::Reqnroll.Table(new string[] {
                             "Cuil"});
-                table24.AddRow(new string[] {
+                table28.AddRow(new string[] {
                             "20-99999999-3"});
 #line 46
  await testRunner.GivenAsync("que no están cargados los pacientes en el sistema se emite el siguiente mensaje: " +
-                        "\"Paciente no registrado. No se puede ingresar a urgencias.\"", ((string)(null)), table24, "Given ");
+                        "\"Paciente no registrado. No se puede ingresar a urgencias.\"", ((string)(null)), table28, "Given ");
 #line hidden
-                global::Reqnroll.Table table25 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table29 = new global::Reqnroll.Table(new string[] {
                             "Cuil",
                             "Apellido",
                             "Nombre",
@@ -310,7 +310,7 @@ await this.FeatureBackgroundAsync();
                             "Localidad",
                             "Obra Social",
                             "Número de Afiliación"});
-                table25.AddRow(new string[] {
+                table29.AddRow(new string[] {
                             "20-99999999-3",
                             "Gonzalez",
                             "Alberto",
@@ -320,7 +320,7 @@ await this.FeatureBackgroundAsync();
                             "MedLife",
                             "123456789"});
 #line 49
- await testRunner.WhenAsync("se cargan los siguientes pacientes:", ((string)(null)), table25, "When ");
+ await testRunner.WhenAsync("se cargan los siguientes pacientes:", ((string)(null)), table29, "When ");
 #line hidden
 #line 52
  await testRunner.ThenAsync("se muestra el siguiente mensaje de error: \"¡No se puede registrar al paciente dad" +
@@ -352,15 +352,15 @@ this.ScenarioInitialize(scenarioInfo);
 #line 9
 await this.FeatureBackgroundAsync();
 #line hidden
-                global::Reqnroll.Table table26 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table30 = new global::Reqnroll.Table(new string[] {
                             "Cuil"});
-                table26.AddRow(new string[] {
+                table30.AddRow(new string[] {
                             "20-99999999-3"});
 #line 56
  await testRunner.GivenAsync("que no están cargados los pacientes en el sistema se emite el siguiente mensaje: " +
-                        "\"Paciente no registrado. No se puede ingresar a urgencias.\"", ((string)(null)), table26, "Given ");
+                        "\"Paciente no registrado. No se puede ingresar a urgencias.\"", ((string)(null)), table30, "Given ");
 #line hidden
-                global::Reqnroll.Table table27 = new global::Reqnroll.Table(new string[] {
+                global::Reqnroll.Table table31 = new global::Reqnroll.Table(new string[] {
                             "Cuil",
                             "Apellido",
                             "Nombre",
@@ -369,7 +369,7 @@ await this.FeatureBackgroundAsync();
                             "Localidad",
                             "Obra Social",
                             "Número de Afiliación"});
-                table27.AddRow(new string[] {
+                table31.AddRow(new string[] {
                             "20-99999999-3",
                             "",
                             "Alberto",
@@ -379,7 +379,7 @@ await this.FeatureBackgroundAsync();
                             "MedLife",
                             ""});
 #line 59
- await testRunner.WhenAsync("se cargan los siguientes pacientes:", ((string)(null)), table27, "When ");
+ await testRunner.WhenAsync("se cargan los siguientes pacientes:", ((string)(null)), table31, "When ");
 #line hidden
 #line 62
  await testRunner.ThenAsync("se muestra el siguiente mensaje de error: \"¡Se omitieron algunos datos mandatorio" +
